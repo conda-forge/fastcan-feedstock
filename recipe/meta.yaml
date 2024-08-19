@@ -20,19 +20,15 @@ requirements:
     - cross-python_{{ target_platform }}    # [build_platform != target_platform]
     - python                                # [build_platform != target_platform]
     - cython                                # [build_platform != target_platform]
-    - scikit-learn                          # [build_platform != target_platform]
     - meson-python                          # [build_platform != target_platform]
     - ninja                                 # [build_platform != target_platform]
     - {{ stdlib('c') }}
     - {{ compiler('c') }}
-    - llvm-openmp  # [osx]
-    - libgomp  # [linux]
   host:
     - python
     - meson-python
     - ninja
     - cython
-    - scikit-learn
     - python-build
     - pip
   run:
