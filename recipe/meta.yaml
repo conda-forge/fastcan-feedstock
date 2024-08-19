@@ -10,25 +10,30 @@ source:
   sha256: fbd9cb29c606d0809c5eb491755308ae9f56bf256eab4cf5d66d9cf2b01b62a1
 
 build:
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
+  skip: true  # [py<39]
+  skip: true  # [python_impl == "pypy"]
 
 requirements:
   build:
+    - cross-python_{{ target_platform }}    # [build_platform != target_platform]
+    - python                                # [build_platform != target_platform]
+    - cython                                # [build_platform != target_platform]
+    - meson-python                          # [build_platform != target_platform]
+    - ninja                                 # [build_platform != target_platform]
+    - scikit-learn >=1.5.0,<1.6             # [build_platform != target_platform]
     - {{ stdlib('c') }}
     - {{ compiler('c') }}
-    - llvm-openmp  # [osx]
-    - libgomp  # [linux]
   host:
-    - python >=3.9
+    - python
     - meson-python
+    - ninja
     - cython
-    - scikit-learn
+    - scikit-learn >=1.5.0,<1.6
     - python-build
     - pip
   run:
-    - python >=3.9
+    - python
     - scikit-learn >=1.5.0,<1.6
 
 test:
