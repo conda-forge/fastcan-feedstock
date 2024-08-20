@@ -21,7 +21,7 @@ requirements:
     - cython                                # [build_platform != target_platform]
     - meson-python                          # [build_platform != target_platform]
     - ninja                                 # [build_platform != target_platform]
-    - scikit-learn >=1.5.0,<1.6             # [build_platform != target_platform]
+    # - scikit-learn >=1.5.0,<1.6             # [build_platform != target_platform]
     - {{ stdlib('c') }}
     - {{ compiler('c') }}
   host:
