@@ -49,6 +49,7 @@ about:
   summary: A fast canonical-correlation-based feature selection method
   license: MIT
   license_file: LICENSE
+  dev_url: https://github.com/MatthewSZhang/fastcan/
 
 extra:
   recipe-maintainers:
