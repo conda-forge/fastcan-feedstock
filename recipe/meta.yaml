@@ -1,5 +1,5 @@
 {% set name = "fastcan" %}
-{% set version = "0.2.1" %}
+{% set version = "0.2.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/fastcan-{{ version }}.tar.gz
-  sha256: da50d251202b417631cdd8dc150856a8c4be8bbc72e79fecc71437ad7c95a053
+  sha256: cea048f9b21a3aa1cdff3cab62438243c6d2a1610c98cf51eb10c795da732e19
 
 build:
-  number: 1
+  number: 0
   skip: true  # [py<39]
   skip: true  # [python_impl == "pypy"]
 
@@ -23,6 +23,8 @@ requirements:
     - ninja
     - {{ stdlib('c') }}
     - {{ compiler('c') }}
+    - llvm-openmp  # [osx]
+    - libgomp  # [linux]
   host:
     - python
     - meson-python
@@ -30,6 +32,9 @@ requirements:
     - scikit-learn >=1.5.0,<1.6
     - python-build
     - pip
+    # See https://github.com/conda-forge/openmp-feedstock/issues/126
+    - llvm-openmp  # [osx]
+    - libgomp  # [linux]
   run:
     - python
     - scikit-learn >=1.5.0,<1.6
