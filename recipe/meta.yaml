@@ -1,5 +1,5 @@
 {% set name = "fastcan" %}
-{% set version = "0.2.4" %}
+{% set version = "0.2.5" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/fastcan-{{ version }}.tar.gz
-  sha256: d3c36b86ce79b739e0e58c582a8cab2ce63187d72b0c1a5aacfa5c72671575a3
+  sha256: 3ed1800362c0fd57ade1cbf9d811d2accde01b533312eedfa9f03e1897fa2f14
 
 build:
   number: 0
