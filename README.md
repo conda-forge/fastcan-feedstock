@@ -9,7 +9,7 @@ Package license: MIT
 
 Summary: A fast canonical-correlation-based feature selection method
 
-Development: https://github.com/MatthewSZhang/fastcan/
+Development: https://github.com/scikit-learn-contrib/fastcan/
 
 Current build status
 ====================
