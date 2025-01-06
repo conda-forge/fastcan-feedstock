@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/fastcan-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/fastcan-{{ version }}.tar.gz
   sha256: d2d842ca808941a2df63c1fbcd9cb2d7dbb712dcd689e083b949520920254014
 
 build:
