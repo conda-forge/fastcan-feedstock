@@ -1,0 +1,19 @@
+# Modified from conda-forge pinning file
+# https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml
+python:
+  # part of a zip_keys: python, is_python_min
+  - 3.9.* *_cpython
+  - 3.10.* *_cpython
+  - 3.11.* *_cpython
+  - 3.12.* *_cpython
+  - 3.13.* *_cp313
+python_min:
+  # minimum supported python version for this package
+  - '3.9'
+is_python_min:
+  # part of a zip_keys: python, is_python_min
+  - true
+  - false
+  - false
+  - false
+  - false
