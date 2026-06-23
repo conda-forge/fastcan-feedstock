@@ -1,7 +1,7 @@
 @echo on
 
 :: Inspired by the numpy-feedstock build script:
-:: https://github.com/conda-forge/numpy-feedstock/blob/main/recipe/bld.bat
+:: https://github.com/conda-forge/numpy-feedstock/blob/main/recipe/build.bat
 
 mkdir builddir
 

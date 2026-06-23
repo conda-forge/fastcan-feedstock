@@ -1,0 +1,71 @@
+schema_version: 1
+
+context:
+  name: fastcan
+  version: "0.6.0"
+  # X.Y.Z-N used in rare cases for PyPI releases
+  version_sanitized: ${{ (version | split("-"))[0] }}
+
+package:
+  name: ${{ name }}
+  version: ${{ version_sanitized }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: 11bc5f94828cba1bd983de81f05f3e3526c1322632d2994dda5b9bcef9e7e9f9
+
+build:
+  number: 0
+  skip: python_impl == "pypy" or match(python, "<3.11")
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then:
+        - cross-python_${{ target_platform }}
+        - python
+        - cython
+        - meson-python
+    - ninja
+    - ${{ stdlib('c') }}
+    - ${{ compiler('c') }}
+    - if: osx
+      then: llvm-openmp
+    - if: linux
+      then: libgomp
+  host:
+    - python
+    - meson-python
+    - cython
+    - scikit-learn >=1.8.0
+    - python-build
+    - pip
+    # See https://github.com/conda-forge/openmp-feedstock/issues/126
+    - if: osx
+      then: llvm-openmp
+    - if: linux
+      then: libgomp
+  run:
+    - python
+    - scikit-learn >=1.8.0
+
+tests:
+  - python:
+      imports:
+        - fastcan
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  homepage: https://fastcan.readthedocs.io/en/latest/
+  summary: A fast canonical-correlation-based search algorithm
+  license: MIT
+  license_file: LICENSE
+  repository: https://github.com/scikit-learn-contrib/fastcan/
+
+extra:
+  recipe-maintainers:
+    - MatthewSZhang
