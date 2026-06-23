@@ -11,7 +11,7 @@ package:
   version: ${{ version_sanitized }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
   sha256: 11bc5f94828cba1bd983de81f05f3e3526c1322632d2994dda5b9bcef9e7e9f9
 
 build:
