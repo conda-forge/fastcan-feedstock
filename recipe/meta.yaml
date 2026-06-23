@@ -1,57 +1,70 @@
-{% set name = "fastcan" %}
-{% set version = "0.5.0" %}
+schema_version: 1
+
+context:
+  name: fastcan
+  version: "0.6.0"
+  # X.Y.Z-N used in rare cases for PyPI releases
+  version_sanitized: ${{ (version | split("-"))[0] }}
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: ${{ name }}
+  version: ${{ version_sanitized }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: f096487acc9898c4a9af4906bffeb9fd2203a277a3e94c0fc586097cc0e769dd
+  sha256: 11bc5f94828cba1bd983de81f05f3e3526c1322632d2994dda5b9bcef9e7e9f9
 
 build:
-  number: 2
-  skip: true  # [python_impl == "pypy"]
+  number: 0
+  skip: python_impl == "pypy" or match(python, "<3.11")
 
 requirements:
   build:
-    - cross-python_{{ target_platform }}    # [build_platform != target_platform]
-    - python                                # [build_platform != target_platform]
-    - cython                                # [build_platform != target_platform]
-    - meson-python                          # [build_platform != target_platform]
+    - if: build_platform != target_platform
+      then:
+        - cross-python_{{ target_platform }}
+        - python
+        - cython
+        - meson-python
     - ninja
-    - {{ stdlib('c') }}
-    - {{ compiler('c') }}
-    - llvm-openmp  # [osx]
-    - libgomp  # [linux]
+    - ${{ stdlib('c') }}
+    - ${{ compiler('c') }}
+    - if: osx
+      then: llvm-openmp
+    - if: linux
+      then: libgomp
   host:
     - python
     - meson-python
     - cython
-    - scikit-learn >=1.6.0
+    - scikit-learn >=1.8.0
     - python-build
     - pip
     # See https://github.com/conda-forge/openmp-feedstock/issues/126
-    - llvm-openmp  # [osx]
-    - libgomp  # [linux]
+    - if: osx
+      then: llvm-openmp
+    - if: linux
+      then: libgomp
   run:
     - python
-    - scikit-learn >=1.6.0
+    - scikit-learn >=1.8.0
 
-test:
-  imports:
-    - fastcan
-  commands:
-    - pip check
-  requires:
-    - pip
+tests:
+  - python:
+      imports:
+        - fastcan
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
 
 about:
-  home: https://fastcan.readthedocs.io/en/latest/
+  homepage: https://fastcan.readthedocs.io/en/latest/
   summary: A fast canonical-correlation-based search algorithm
   license: MIT
   license_file: LICENSE
-  dev_url: https://github.com/scikit-learn-contrib/fastcan/
+  repository: https://github.com/scikit-learn-contrib/fastcan/
 
 extra:
   recipe-maintainers:
