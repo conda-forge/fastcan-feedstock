@@ -15,7 +15,7 @@ source:
   sha256: 11bc5f94828cba1bd983de81f05f3e3526c1322632d2994dda5b9bcef9e7e9f9
 
 build:
-  number: 0
+  number: 1
   skip: python_impl == "pypy" or match(python, "<3.11")
 
 requirements:
